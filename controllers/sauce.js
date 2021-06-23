@@ -91,7 +91,6 @@ exports.getAllThings = (req, res, next) => {
             break;
 
           } else if (sauce.usersDisliked.includes(userId)){ //Si User a deja disliké cette sauce (présent dans tableau usersDisliked)
-        
             await Thing.findByIdAndUpdate(id, { $inc: {dislikes: -1}, $pull: {usersDisliked: userId}}) // retire le dislike et sort user du tableau usersDisliked
             .then(() => res.status(201).json({ message: 'Dislike retiré !'}))
             .catch(error => res.status(400).json({ error }));  
